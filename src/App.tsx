@@ -1,11 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 import { Navbar } from './layouts/NavbarAndFooter/Navbar'
-import { ExploreTopBooks } from './layouts/HomePage/ExploreTopBooks'
-import { Carousel } from './layouts/HomePage/Carousel'
-import { Heros } from './layouts/HomePage/Heros'
-import { LibraryService } from './layouts/HomePage/LibraryService'
 import { Footer } from './layouts/NavbarAndFooter/Footer'
+import { HomePage } from './layouts/HomePage/HomePage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,10 +10,7 @@ function App() {
   return (
     <div>
       <Navbar />
-      <ExploreTopBooks />
-      <Carousel />
-      <Heros />
-      <LibraryService />
+      <HomePage />
       <Footer />
     </div>
   )

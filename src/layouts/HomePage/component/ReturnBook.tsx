@@ -1,4 +1,4 @@
-import image1 from './../../Images/BooksImages/book-luv2code-1000.png'
+import image1 from './../../../Images/BooksImages/book-luv2code-1000.png'
 
 export const ReturnBook = () => {
     return (
