@@ -5,6 +5,7 @@ import { ExploreTopBooks } from './layouts/HomePage/ExploreTopBooks'
 import { Carousel } from './layouts/HomePage/Carousel'
 import { Heros } from './layouts/HomePage/Heros'
 import { LibraryService } from './layouts/HomePage/LibraryService'
+import { Footer } from './layouts/NavbarAndFooter/Footer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,6 +17,7 @@ function App() {
       <Carousel />
       <Heros />
       <LibraryService />
+      <Footer />
     </div>
   )
 }
