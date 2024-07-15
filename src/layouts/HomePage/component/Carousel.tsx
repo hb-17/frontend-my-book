@@ -1,6 +1,24 @@
+import { useEffect, useState } from "react"
 import { ReturnBook } from "./ReturnBook"
+import BookModel from "../../../models/BookModels"
 
 export const Carousel = () => {
+    const [books, setBooks] = useState<BookModel[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [httpError, setHttpError] = useState(null);
+
+    useEffect(() => {
+        const fetchBooks = async () => {
+            // Kode untuk mengambil data buku dari sumber eksternal (misalnya, API)
+
+            // Mengatur state dengan data yang diperoleh
+        };
+        fetchBooks().catch((error: any) => {
+            setIsLoading(false);
+            setHttpError(error.message);
+        })
+    }, []);
+
     return (
         <div className='container mt-5' style={{ height: 550 }}>
             <div className='homepage-carousel-title'>
