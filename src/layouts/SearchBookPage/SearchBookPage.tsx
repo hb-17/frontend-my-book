@@ -15,11 +15,23 @@ export const SearchBookPage = () => {
     const [totalAmountOfBooks, setTotalAmountOfBooks] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
 
+    const [search, setSearch] = useState('');
+    const [searchUrl, setSearchUrl] = useState('');
+
 
     useEffect(() => {
         const fetchBooks = async () => {
             const baseURL = "http://localhost:8080/api/books";
-            const url = `${baseURL}?page=${currentPage - 1}&size=${booksPerPage}`;
+            // const url = `${baseURL}?page=${currentPage - 1}&size=${booksPerPage}`;
+            let url = '';
+
+            if (searchUrl === '') {
+                url = `${baseURL}?page=${currentPage - 1}&size=${booksPerPage}`;
+            } else {
+                url = baseURL + searchUrl;
+            }
+
+
             const response = await fetch(url);
 
             if (!response.ok) {
@@ -54,7 +66,7 @@ export const SearchBookPage = () => {
             setHttpError(error.message)
         })
         window.scrollTo(0, 0);
-    }, [currentPage]);
+    }, [currentPage, searchUrl]);
 
 
     if (isLoading) {
@@ -70,6 +82,15 @@ export const SearchBookPage = () => {
             </div>
         )
     }
+
+    const searchHandleChange = () => {
+        if (search === '') {
+            setSearchUrl('');
+        } else {
+            setSearchUrl(`/search/findByTitleContaining?title=${search}&page=0&size=${booksPerPage}`);
+        }
+    }
+
 
     const indexOfLastBook: number = currentPage * booksPerPage;
     const indexOfFirstBook: number = indexOfLastBook - booksPerPage;
@@ -87,10 +108,13 @@ export const SearchBookPage = () => {
                                     type="search"
                                     placeholder="Search"
                                     aria-labelledby="Search"
+                                    onChange={e => setSearch(e.target.value)}
                                 />
-                                <button className="btn btn-outline-success">
+                                <button className="btn btn-outline-success"
+                                    onClick={() => searchHandleChange()}>
                                     Search
                                 </button>
+
                             </div>
                         </div>
                         <div className="col-4">
@@ -139,17 +163,33 @@ export const SearchBookPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-3">
-                        <h5>Number of result: (22)</h5>
-                    </div>
-                    <p>
-                        1 of 5 from 22 items
-                    </p>
-                    <>
-                        {books.map(book => (
-                            <SearchBook book={book} key={book.id} />
-                        ))}
-                    </>
+                    {totalAmountOfBooks > 0 ?
+                        <>
+                            <div className="mt-3">
+                                <h5>Number of result:
+                                    ({totalAmountOfBooks})</h5>
+                            </div>
+                            <p>
+                                {indexOfFirstBook + 1} to {lastItem} of
+                                {totalAmountOfBooks} items
+                            </p>
+                            {books.map(book => (
+                                <SearchBook book={book} key={book.id}
+                                />
+                            ))}
+                        </>
+                        :
+                        <>
+                            <div className="m-5">
+                                <h3>
+                                    Can't find what you are looking for?
+                                </h3>
+                                <a href="#" type="button" className="btn main-color btn-md px-4 me-md-2 fw-bold text-white">
+                                    Library Service
+                                </a>
+                            </div>
+                        </>
+                    }
                     {totalPages > 1 &&
                         <Pagination currentPage={currentPage}
                             totalPage={totalPages} paginate={paginate} />
