@@ -10,22 +10,23 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div>
+    <div className='d-flex flex-column min-vh-100'>
       <Navbar />
-      <Switch>
-        <Route path='/' exact>
-          <Redirect to='/home' />
-        </Route>
+      <div className='flex-grow-1'>
+        <Switch>
+          <Route path='/' exact>
+            <Redirect to='/home' />
+          </Route>
 
-        <Route path='/home'>
-          <HomePage />
-        </Route>
+          <Route path='/home'>
+            <HomePage />
+          </Route>
 
-        <Route path='/search'>
-          <SearchBookPage />
-        </Route>
-      </Switch>
-
+          <Route path='/search'>
+            <SearchBookPage />
+          </Route>
+        </Switch>
+      </div>
       <Footer />
     </div>
   )
