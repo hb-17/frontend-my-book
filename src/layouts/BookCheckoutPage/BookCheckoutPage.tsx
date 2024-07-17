@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import BookModel from "../../models/BookModels"
 import { SpinnerLoading } from "../Utils/SpinnerLoading";
 import image1 from '../../Images/BooksImages/book-luv2code-1000.png';
+import { StarsReview } from "../Utils/StarReview";
 
 export const BookCheckoutPage = () => {
     const [book, setBook] = useState<BookModel>();
@@ -79,6 +80,7 @@ export const BookCheckoutPage = () => {
                             <h5
                                 className="text-primary">{book?.author}</h5>
                             <p className="lead">{book?.description}</p>
+                            <StarsReview rating={4} size={32} />
                         </div>
                     </div>
                 </div>
@@ -91,7 +93,7 @@ export const BookCheckoutPage = () => {
                             height='349' alt="Book" />
                         :
                         <img
-                            src={require('./../../Images/BooksImages/book-luv2code-1000.png')}
+                            src={image1}
                             width='226'
                             height='349'
                             alt="Book" />
@@ -103,6 +105,7 @@ export const BookCheckoutPage = () => {
                         <h5
                             className="text-primary">{book?.author}</h5>
                         <p className="lead">{book?.description}</p>
+                        <StarsReview rating={4} size={32} />
                     </div>
                 </div>
                 <hr />
