@@ -3,7 +3,7 @@ import './App.css'
 import { Navbar } from './layouts/NavbarAndFooter/Navbar'
 import { Footer } from './layouts/NavbarAndFooter/Footer'
 import { HomePage } from './layouts/HomePage/HomePage'
-import { Route } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { SearchBookPage } from './layouts/SearchBookPage/SearchBookPage'
 
 function App() {
@@ -12,13 +12,19 @@ function App() {
   return (
     <div>
       <Navbar />
-      <Route path='/'>
-        <HomePage />
-      </Route>
-      
-      <Route path='/search'>
-        <SearchBookPage />
-      </Route>
+      <Switch>
+        <Route path='/' exact>
+          <Redirect to='/home' />
+        </Route>
+
+        <Route path='/home'>
+          <HomePage />
+        </Route>
+
+        <Route path='/search'>
+          <SearchBookPage />
+        </Route>
+      </Switch>
 
       <Footer />
     </div>
