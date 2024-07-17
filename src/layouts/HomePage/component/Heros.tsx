@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export const Heros = () => {
     return (
         <div>
@@ -16,11 +18,11 @@ export const Heros = () => {
                                 grow within one, we will be able to provide
                                 the top content for you!.
                             </p>
-                            <a
+                            <Link
                                 className="btn main-color btn-lg text-white"
-                                href="#">
+                                to="#">
                                 Sign Up
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -60,11 +62,11 @@ export const Heros = () => {
                                 grow within one, we will be able to provide
                                 the top content for you!.
                             </p>
-                            <a
+                            <Link
                                 className="btn main-color btn-lg text-white"
-                                href="#">
+                                to="#">
                                 Sign Up
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="m-2">

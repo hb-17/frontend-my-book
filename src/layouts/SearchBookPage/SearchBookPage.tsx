@@ -4,6 +4,7 @@ import { error } from "console";
 import { SpinnerLoading } from "../Utils/SpinnerLoading";
 import { SearchBook } from "./component/SearchBook";
 import { Pagination } from "../Utils/Pagination";
+import { Link } from "react-router-dom";
 
 export const SearchBookPage = () => {
     const [books, setBooks] = useState<BookModel[]>([]);
@@ -31,7 +32,7 @@ export const SearchBookPage = () => {
             if (searchUrl === '') {
                 url = `${baseURL}?page=${currentPage - 1}&size=${booksPerPage}`;
             } else {
-                let searchWithPage = searchUrl.replace('<pageNumber>', `${currentPage - 1}`);
+                const searchWithPage = searchUrl.replace('<pageNumber>', `${currentPage - 1}`);
                 url = baseURL + searchWithPage;
 
             }
@@ -117,7 +118,7 @@ export const SearchBookPage = () => {
 
     const indexOfLastBook: number = currentPage * booksPerPage;
     const indexOfFirstBook: number = indexOfLastBook - booksPerPage;
-    let lastItem = booksPerPage * currentPage <= totalAmountOfBooks ? booksPerPage * currentPage : totalAmountOfBooks;
+    const lastItem = booksPerPage * currentPage <= totalAmountOfBooks ? booksPerPage * currentPage : totalAmountOfBooks;
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
     return (
@@ -153,42 +154,39 @@ export const SearchBookPage = () => {
                                     aria-labelledby="dropdownMenuButton1">
                                     <li onClick={() =>
                                         categoryField('All')}>
-                                        <a href="#"
+                                        <Link to="#"
                                             className="dropdown-item">
                                             All
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li onClick={() =>
                                         categoryField('BE')}>
-
-                                        <a href="#"
+                                        <Link to="#"
                                             className="dropdown-item">
                                             Backend
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li onClick={() =>
                                         categoryField('FE')}>
-                                        <a href="#"
+                                        <Link to="#"
                                             className="dropdown-item">
 
                                             Frontend
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li onClick={() =>
                                         categoryField('Data')}>
-
-                                        <a href="#"
+                                        <Link to="#"
                                             className="dropdown-item">
                                             Data
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li onClick={() =>
                                         categoryField('DevOps')}>
-
-                                        <a href="#"
+                                        <Link to="#"
                                             className="dropdown-item">
                                             DevOps
-                                        </a>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
@@ -215,9 +213,9 @@ export const SearchBookPage = () => {
                                 <h3>
                                     Can't find what you are looking for?
                                 </h3>
-                                <a href="#" type="button" className="btn main-color btn-md px-4 me-md-2 fw-bold text-white">
+                                <Link to="#" type="button" className="btn main-color btn-md px-4 me-md-2 fw-bold text-white">
                                     Library Service
-                                </a>
+                                </Link>
                             </div>
                         </>
                     }
