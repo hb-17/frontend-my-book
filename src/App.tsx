@@ -5,6 +5,7 @@ import { Footer } from './layouts/NavbarAndFooter/Footer'
 import { HomePage } from './layouts/HomePage/HomePage'
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { SearchBookPage } from './layouts/SearchBookPage/SearchBookPage'
+import { BookCheckoutPage } from './layouts/BookCheckoutPage/BookCheckoutPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -24,6 +25,10 @@ function App() {
 
           <Route path='/search'>
             <SearchBookPage />
+          </Route>
+
+          <Route path='/checkout/:bookId'>
+            <BookCheckoutPage />
           </Route>
         </Switch>
       </div>
