@@ -18,6 +18,9 @@ export const SearchBookPage = () => {
     const [search, setSearch] = useState('');
     const [searchUrl, setSearchUrl] = useState('');
 
+    const [categorySelection, setCategorySelection] = useState('Book Category');
+
+
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -28,9 +31,10 @@ export const SearchBookPage = () => {
             if (searchUrl === '') {
                 url = `${baseURL}?page=${currentPage - 1}&size=${booksPerPage}`;
             } else {
-                url = baseURL + searchUrl;
-            }
+                let searchWithPage = searchUrl.replace('<pageNumber>', `${currentPage - 1}`);
+                url = baseURL + searchWithPage;
 
+            }
 
             const response = await fetch(url);
 
@@ -84,10 +88,29 @@ export const SearchBookPage = () => {
     }
 
     const searchHandleChange = () => {
+        setCurrentPage(1);
         if (search === '') {
             setSearchUrl('');
         } else {
-            setSearchUrl(`/search/findByTitleContaining?title=${search}&page=0&size=${booksPerPage}`);
+            setSearchUrl(`/search/findByTitleContaining?title=${search}&page=<pageNumber>&size=${booksPerPage}`);
+        }
+        setCategorySelection('Book category');
+    }
+
+    const categoryField = (value: string) => {
+        setCurrentPage(1);
+        if (
+            value.toLowerCase() === 'fe' ||
+            value.toLowerCase() === 'be' ||
+            value.toLowerCase() === 'data' ||
+            value.toLowerCase() === 'devops'
+        ) {
+            setCategorySelection(value);
+            setSearchUrl(`/search/findByCategory?category=${value}&page=<pageNumber>&size=${booksPerPage}`);
+        } else {
+            setCategorySelection('All');
+            setSearchUrl(`?page=<pageNumber>&size=${booksPerPage}`);
+
         }
     }
 
@@ -124,36 +147,44 @@ export const SearchBookPage = () => {
                                     id="dropdownMenuButton1"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    Category
+                                    {categorySelection}
                                 </button>
                                 <ul className="dropdown-menu"
                                     aria-labelledby="dropdownMenuButton1">
-                                    <li>
+                                    <li onClick={() =>
+                                        categoryField('All')}>
                                         <a href="#"
                                             className="dropdown-item">
                                             All
                                         </a>
                                     </li>
-                                    <li>
+                                    <li onClick={() =>
+                                        categoryField('BE')}>
+
                                         <a href="#"
                                             className="dropdown-item">
                                             Backend
                                         </a>
                                     </li>
-                                    <li>
+                                    <li onClick={() =>
+                                        categoryField('FE')}>
                                         <a href="#"
                                             className="dropdown-item">
 
                                             Frontend
                                         </a>
                                     </li>
-                                    <li>
+                                    <li onClick={() =>
+                                        categoryField('Data')}>
+
                                         <a href="#"
                                             className="dropdown-item">
                                             Data
                                         </a>
                                     </li>
-                                    <li>
+                                    <li onClick={() =>
+                                        categoryField('DevOps')}>
+
                                         <a href="#"
                                             className="dropdown-item">
                                             DevOps
