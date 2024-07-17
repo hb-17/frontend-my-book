@@ -3,6 +3,7 @@ import BookModel from "../../models/BookModels"
 import { SpinnerLoading } from "../Utils/SpinnerLoading";
 import image1 from '../../Images/BooksImages/book-luv2code-1000.png';
 import { StarsReview } from "../Utils/StarReview";
+import { CheckoutAndReviewBox } from "./CheckoutAndReviewBox";
 
 export const BookCheckoutPage = () => {
     const [book, setBook] = useState<BookModel>();
@@ -83,6 +84,7 @@ export const BookCheckoutPage = () => {
                             <StarsReview rating={4} size={32} />
                         </div>
                     </div>
+                    <CheckoutAndReviewBox book={book} mobile={false} />
                 </div>
                 <hr />
             </div>
@@ -108,6 +110,7 @@ export const BookCheckoutPage = () => {
                         <StarsReview rating={4} size={32} />
                     </div>
                 </div>
+                <CheckoutAndReviewBox book={book} mobile={true} />
                 <hr />
             </div>
         </div>
