@@ -4,6 +4,7 @@ import OktaSignIn from '@okta/okta-signin-widget';
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 
 interface OktaSigninWidgetProps {
+    config: Record<string, any>;
     onSuccess: (tokens: any) => void;
     onError: (err: Error) => void;
 }
